@@ -18,3 +18,7 @@ source venv/bin/activate
 # configurar alembic el ORM
 
 `alembic init alembic`
+
+
+# si ves esto todo bien !
+![alt text](image.png)
