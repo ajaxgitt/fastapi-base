@@ -26,3 +26,6 @@ class Post(Base):
 
     # post.user -> devuelve el objeto User (el autor)
     user = relationship("User", back_populates="posts")
+
+    # post.tags -> LISTA de Tag (muchos a muchos a traves de post_tags)
+    tags = relationship("Tag", secondary="post_tags", back_populates="posts")
