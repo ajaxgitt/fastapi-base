@@ -76,3 +76,14 @@ docker exec -it fastapi_base_db psql -U fastapi_user -d fastapi_base
 # bajar los contenedores (-v borra también el volumen de la db)
 docker compose -f docker-compose.yml -f docker-compose.dev.yml down
 ```
+
+
+# migraciones 
+> 1 . para hacer una migración se debe crear el modelo después importarlo a el env.py de alembic y a __init__.py de models
+
+> 2. después entrar al contenedor de docker con `docker exec -it fastapi_base_app bash` 
+> 3. correr este comando `alembic revision --autogenerate -m 'comentario de la migración'`
+> 4. aparecerá un archivo en versions de alembic
+> 5. si falla puedes eliminar esa carpeta y volver al paso 3 
+> 6. si todo esta ok lo corremos `alembic upgrade head` para que nuestros cambios sean permanentes
+  

@@ -10,6 +10,9 @@ import os
 from dotenv import load_dotenv
 
 
+from src.models.user import User
+
+
 
 load_dotenv() # <--- inicializamos el dotenv
 config = context.config
