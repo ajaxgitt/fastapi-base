@@ -86,4 +86,5 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml down
 > 4. aparecerá un archivo en versions de alembic
 > 5. si falla puedes eliminar esa carpeta y volver al paso 3 
 > 6. si todo esta ok lo corremos `alembic upgrade head` para que nuestros cambios sean permanentes
+> 7. para revisar que el modelo si existe te puedes conectar a la base de datos de postgres por consola con el siguiente comando   `docker exec -it fastapi_base_db psql -U fastapi_user -d fastapi_base` se te abrirá la consola puedes colocar `\dt` ese comando te muestra todas las tablas del la base de datos para salir solo `exit` 
   
