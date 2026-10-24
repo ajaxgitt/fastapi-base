@@ -7,6 +7,7 @@ class Settings(BaseSettings):
 
     SECRET_KEY: str # para el token
     ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: 60
 
     class Config:
         env_file = '.env'
