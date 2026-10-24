@@ -1,0 +1,23 @@
+services:
+  app:
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+    command: uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://fastapi_user:fastapi_pass@db:5432/fastapi_base
+
+  db:
+    # en dev la db tambien entra a la red web para poder abrirla
+    # desde el host (DBeaver, psql, etc.) en localhost:5433
+    networks:
+      - backend
+      - web
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=fastapi_user
+      - POSTGRES_PASSWORD=fastapi_pass
+      - POSTGRES_DB=fastapi_base

@@ -1,0 +1,40 @@
+services:
+  app:
+    build: .
+    container_name: fastapi_base_app
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - web
+      - backend
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    container_name: fastapi_base_db
+    env_file: .env
+    networks:
+      - backend
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fastapi_user} -d ${POSTGRES_DB:-fastapi_base}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  # red publica: la app se comunica con el exterior
+  web:
+    driver: bridge
+  # red interna: solo app <-> db, sin salida a internet
+  backend:
+    driver: bridge
+    internal: true
+
+volumes:
+  postgres_data:
+    driver: local
