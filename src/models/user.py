@@ -20,3 +20,10 @@ class User(Base):
         uselist=False,
         cascade="all, delete-orphan",
     )
+
+    # user.posts -> devuelve una LISTA de Post (uno a muchos, sin uselist=False)
+    posts = relationship(
+        "Post",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
